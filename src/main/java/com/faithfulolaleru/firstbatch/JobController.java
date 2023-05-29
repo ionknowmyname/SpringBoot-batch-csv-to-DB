@@ -18,21 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class JobController {
 
-    private JobLauncher jobLauncher;
-
-    private Job job;
-
-    @PostMapping("/import")
-    public void importCsvToDBJob() {
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addLong("startAt", System.currentTimeMillis()).toJobParameters();
-        try {
-            jobLauncher.run(job, jobParameters);
-        } catch (JobExecutionAlreadyRunningException
-                    | JobRestartException | JobInstanceAlreadyCompleteException
-                    | JobParametersInvalidException e) {
-
-            e.printStackTrace();
-        }
-    }
+//    private JobLauncher jobLauncher;
+//
+//    private Job job;
+//
+//    @PostMapping("/import")
+//    public void importCsvToDBJob() {
+//        JobParameters jobParameters = new JobParametersBuilder()
+//                .addLong("startAt", System.currentTimeMillis()).toJobParameters();
+//        try {
+//            jobLauncher.run(job, jobParameters);
+//        } catch (JobExecutionAlreadyRunningException
+//                    | JobRestartException | JobInstanceAlreadyCompleteException
+//                    | JobParametersInvalidException e) {
+//
+//            e.printStackTrace();
+//        }
+//    }
 }

@@ -1,0 +1,12 @@
+﻿Code,Account Name,Type,Allow Reconciliation,External ID
+999999,Undistributed Profits/Losses,Current Year Earnings,TRUE,__export__.account_account_41_e41cb573
+301000,Capital,Equity,FALSE,l10n_generic_coa.1_capital
+302000,Dividends,Equity,TRUE,l10n_generic_coa.1_dividends
+151000,Fixed Asset,Fixed Assets,TRUE,l10n_generic_coa.1_fixed_assets
+400000,Product Sales,Income,TRUE,l10n_generic_coa.1_income
+441000,Foreign Exchange Gain,Income,TRUE,l10n_generic_coa.1_income_currency_exchange
+442000,Cash Difference Gain,Income,FALSE,l10n_generic_coa.1_cash_diff_income
+191000,Non-current assets,Non-current Assets,TRUE,l10n_generic_coa.1_non_current_assets
+291000,Non-current Liabilities,Non-current Liabilities,TRUE,l10n_generic_coa.1_non_current_liabilities
+450000,Other Income,Other Income,TRUE,l10n_generic_coa.1_other_income
+211000,Account Payable,Payable,TRUE,l10n_generic_coa.1_payable

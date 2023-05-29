@@ -9,6 +9,7 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
@@ -18,6 +19,7 @@ import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.batch.item.support.IteratorItemReader;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +27,13 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.util.ResourceUtils;
 
 import javax.sql.DataSource;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 @Configuration
 @EnableBatchProcessing
@@ -43,6 +50,10 @@ public class BatchConfig {
     private PlatformTransactionManager transactionManager;
 
     private DataSource dataSource;
+
+    private final CsvReader csvReader;
+
+    private final CustomWriter customWriter;
 
 //    private AccountRepository accountRepository;
 
@@ -64,6 +75,17 @@ public class BatchConfig {
 
         return itemReader;
     }
+
+    /*@Bean
+    public ItemReader<Account> csvItemReader() throws Exception {
+        // Path filePath = Paths.get("Book1.csv");
+
+        File file = ResourceUtils.getFile("classpath:Book1.csv");
+        String path = file.getPath();
+        List<Account> data = csvReader.readCsvFile2(Path.of(path));
+
+        return new IteratorItemReader<>(data);
+    }*/
 
     private LineMapper<Account> lineMapper() {
         DefaultLineMapper<Account> lineMapper = new DefaultLineMapper<>();
@@ -132,8 +154,8 @@ public class BatchConfig {
         return asyncTaskExecutor;
     }
 
-    @Bean
-    public Step step1() {
+/*    @Bean
+    public Step step1() throws Exception {
 //        return stepBuilderFactory.get("step1").<Account, Account>chunk(3)
 //                .reader(reader())
 //                .processor(processor())
@@ -142,15 +164,15 @@ public class BatchConfig {
 //                .build();
 
         return new StepBuilder("step1", jobRepository).<Account, Account>chunk(3, transactionManager)
-                .reader(reader())
-                .processor(processor())
-                .writer(writer3())
-                .taskExecutor(taskExecutor())
+                .reader(csvItemReader())
+//                .processor(processor())
+                .writer(customWriter)
+//                .taskExecutor(taskExecutor())
                 .build();
-    }
+    }*/
 
-    @Bean
-    public Job runJob() {
+    /*@Bean
+    public Job runJob() throws Exception {
 //        return jobBuilderFactory.get("runJob")
 //                .flow(step1()).end().build();
 
@@ -158,4 +180,6 @@ public class BatchConfig {
                 .start(step1()).build();
 
     }
+
+     */
 }

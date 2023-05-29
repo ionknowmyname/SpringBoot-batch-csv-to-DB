@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS accounts;
+
 create table accounts (
     id bigint not null,
     account_name varchar(255),

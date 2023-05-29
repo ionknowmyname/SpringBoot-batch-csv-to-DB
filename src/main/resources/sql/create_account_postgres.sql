@@ -1,5 +1,7 @@
+DROP TABLE IF EXISTS accounts;
+
 create table accounts (
-    id bigint not null,
+    id int not null,
     account_name varchar(255),
     allow_reconciliation varchar(255),
     code varchar(255),
@@ -7,3 +9,4 @@ create table accounts (
     type varchar(255),
     primary key (id)
 )
+
